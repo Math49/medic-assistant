@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const HOSPITAL_OPTIONS = ['hopital sud', 'paleto'];
-const CHAMBRE_OPTIONS = ['salle de reveil WARD', "chambre d'hospitalisation"];
-const PAPIER_OPTIONS = ["l'ordonnance", "l'arret de travail"];
-const DEPART_OPTIONS = ['Depart du Centre Hospitalier', 'Hospitalisation'];
+const HOSPITAL_OPTIONS = ['hôpital sud', 'paleto'];
+const CHAMBRE_OPTIONS = ['salle de réveil WARD', "chambre d'hospitalisation"];
+const PAPIER_OPTIONS = ["l'ordonnance", "l'arrêt de travail"];
+const DEPART_OPTIONS = ['départ du Centre Hospitalier', 'Hospitalisation'];
 
 type FixedCardProps = {
     className?: string;
@@ -53,14 +53,14 @@ export default function FixedCard({
             setHospitalText('');
             return;
         }
-        setHospitalText(`Emmene au ${hospitalChoice}`);
+        setHospitalText(`Emmené à ${hospitalChoice}`);
     }, [hospitalChoice, hospitalDirty]);
 
     const generatedSortieText = useMemo(() => {
         const parts: string[] = [];
 
         if (chambreSelections.length > 0) {
-            parts.push(`Deplacement du patient dans ${formatList(chambreSelections)}`);
+            parts.push(`Déplacement du patient dans ${formatList(chambreSelections)}`);
         }
 
         if (papierSelections.length > 0) {
@@ -133,7 +133,7 @@ export default function FixedCard({
                     }}
                     placeholder="Texte genere pour la section hopital"
                     className="mt-4 w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
-                    rows={4}
+                    rows={1}
                 />
             </section>
 
@@ -237,7 +237,7 @@ export default function FixedCard({
                     }}
                     placeholder="Texte genere pour la section sortie"
                     className="mt-6 w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
-                    rows={5}
+                    rows={3}
                 />
             </section>
         </div>

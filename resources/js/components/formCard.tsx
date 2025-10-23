@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 type InjuryField = {
@@ -6,15 +6,14 @@ type InjuryField = {
     type: 'radio' | 'checkbox' | 'number';
     forms?: string[];
     text: string;
-    className?: string;
-    classname?: string;
+    baseClassname?: string;
+    contentClassname?: string;
 };
 
 type Injury = {
     id: string;
     title: string;
     body: InjuryField[];
-    className?: string;
     classname?: string;
 };
 
@@ -106,9 +105,15 @@ export default function FormCard({
         }
     }, [autoText, dirty]);
 
+    const onChangeRef = useRef(onChange);
+
     useEffect(() => {
-        onChange?.(text);
-    }, [text, onChange]);
+        onChangeRef.current = onChange;
+    }, [onChange]);
+
+    useEffect(() => {
+        onChangeRef.current?.(text);
+    }, [text]);
 
     const updateAnswer = useCallback(
         (key: string, value: AnswerValue) => {
@@ -151,11 +156,11 @@ export default function FormCard({
     const renderField = (field: InjuryField) => {
         const answerKey = normalizeToken(field.category);
         const answer = answers[answerKey];
-        const fieldClass = field.className ?? field.classname ?? '';
+        const fieldClass = `space-y-2 ${field.contentClassname}`;
 
         if (field.type === 'radio') {
             return (
-                <div className={cn('space-y-2', fieldClass)}>
+                <div className={fieldClass}>
                     {field.forms?.map((option) => (
                         <label
                             key={option}
@@ -181,7 +186,7 @@ export default function FormCard({
         if (field.type === 'checkbox') {
             const selected = Array.isArray(answer) ? answer : [];
             return (
-                <div className={cn('space-y-2', fieldClass)}>
+                <div className={fieldClass}>
                     {field.forms?.map((option) => (
                         <label
                             key={option}
@@ -204,7 +209,7 @@ export default function FormCard({
         }
 
         return (
-            <div className={cn('space-y-2', fieldClass)}>
+            <div className={fieldClass}>
                 <input
                     type="number"
                     inputMode="numeric"
@@ -221,9 +226,7 @@ export default function FormCard({
 
     return (
         <div
-            className={cn(
-                'w-full rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-100 shadow-[0_25px_55px_-30px_rgba(15,23,42,0.9)] backdrop-blur',
-            )}
+            className={`w-full rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-100 shadow-[0_25px_55px_-30px_rgba(15,23,42,0.9)] backdrop-blur`}
         >
             <header className="mb-6 flex items-center justify-between gap-4">
                 <div>
@@ -242,9 +245,9 @@ export default function FormCard({
                 )}
             </header>
 
-            <div className={cn('space-y-6', injury.classname)}>
+            <div className={`${injury.classname}`}>
                 {injury.body.map((field) => (
-                    <div key={field.category} className="space-y-3">
+                    <div key={field.category} className={`space-y-1 ${field.baseClassname}`}>
                         <h4 className="text-sm font-semibold text-slate-200">
                             {field.category}
                         </h4>

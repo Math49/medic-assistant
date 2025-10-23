@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import DateCard from '@/components/dateCard';
 import FixedCard from '@/components/fixedCard';
 import FormCard from '@/components/formCard';
@@ -38,6 +38,8 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
     const [isSelectingInjury, setIsSelectingInjury] = useState(false);
     const [rendu, setRendu] = useState('');
 
+    console.log({ injuries });
+
     useEffect(() => {
         const sections = [
             hospitalText,
@@ -59,33 +61,36 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
         [injuries],
     );
 
-    const handleSelectInjury = (injuryId: string) => {
-        const target = injuryOptions.find((option) => option.id === injuryId);
-        if (!target) {
-            return;
-        }
+    const handleSelectInjury = useCallback(
+        (injuryId: string) => {
+            const target = injuryOptions.find((option) => option.id === injuryId);
+            if (!target) {
+                return;
+            }
 
-        setInjuryForms((previous) => [
-            ...previous,
-            {
-                key: createFormKey(target.id),
-                injury: target.injury,
-                text: '',
-            },
-        ]);
-    };
+            setInjuryForms((previous) => [
+                ...previous,
+                {
+                    key: createFormKey(target.id),
+                    injury: target.injury,
+                    text: '',
+                },
+            ]);
+        },
+        [injuryOptions],
+    );
 
-    const handleInjuryChange = (key: string, value: string) => {
+    const handleInjuryChange = useCallback((key: string, value: string) => {
         setInjuryForms((previous) =>
             previous.map((form) =>
                 form.key === key ? { ...form, text: value } : form,
             ),
         );
-    };
+    }, []);
 
-    const handleInjuryRemove = (key: string) => {
+    const handleInjuryRemove = useCallback((key: string) => {
         setInjuryForms((previous) => previous.filter((form) => form.key !== key));
-    };
+    }, []);
 
     return (
         <>
@@ -97,8 +102,14 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                 />
             </Head>
 
-            <div className="flex min-h-screen items-center gap-5 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6 text-slate-100">
-                <div className="h-screen w-3/4 space-y-6 overflow-y-auto pr-3">
+            <div className="flex min-h-screen items-center gap-5 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100">
+                <div className="h-screen overflow-y-auto w-3/4 space-y-6 px-4 py-6
+                                [&::-webkit-scrollbar]:w-2
+                                [&::-webkit-scrollbar-track]:rounded-full
+                                [&::-webkit-scrollbar-track]:bg-slate-700
+                                [&::-webkit-scrollbar-thumb]:rounded-full
+                                [&::-webkit-scrollbar-thumb]:bg-slate-500
+                ">
                     <div className="flex w-full flex-wrap items-center gap-4">
                         <button
                             type="button"
@@ -123,7 +134,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                         onSortieChange={setSortieText}
                     />
 
-                    <div className="space-y-4">
+                    <div className="space-y-4 ">
                         {injuryForms.map((form) => (
                             <FormCard
                                 key={form.key}
@@ -174,7 +185,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                     </div>
                 </div>
 
-                <div className="h-screen w-1/4 space-y-6 overflow-y-auto pl-1">
+                <div className="h-screen w-1/4 space-y-6 px-4 py-6 right-0 top-0 ">
                     <DateCard />
                     <RenduCard data={rendu} onChange={setRendu} />
                 </div>
