@@ -1,53 +1,47 @@
 {
     "_id": { "$oid": "68fa0bbae58ddf5d8922a154" },
-    "title": "Blessure par balle",
+    "title": "Imagerie",
     "body": [
         {
             "category": "Lieu",
             "type": "radio",
-            "forms": ["Bloc 1", "Bloc 2", "Bloc 3", "Bloc 4"],
-            "text": "Départ pour {lieu} \\n",
-            "baseClassname": "col-span-3 row-span-2",
+            "forms": ["radiologie", "scanner", "IRM"],
+            "text": "Départ pour {lieu} \n",
+            "baseClassname": "col-span-3",
             "contentClassname": ""
+        },
+        {
+            "category": "Blessure",
+            "type": "radio",
+            "forms": ["Fracture", "Fissures", "Hémoragie", "bas"],
+            "text": "{blessure} ",
+            "baseClassname": "col-span-5 col-start-4",
+            "contentClassname": "grid grid-cols-3 gap-2"
         },
         {
             "category": "Région",
             "type": "radio",
-            "forms": ["Bras", "Avant-bras", "Main", "Jambe", "Cuisse", "Pied", "Abdomen", "Thorax", "Tête", "Dos", "Flanc"],
-            "text": "Blessure par balle au niveau de l'{Région} ",
-            "baseClassname": "col-span-3 row-span-2 col-start-3",
-            "contentClassname": "col-span-6 row-span-2 col-start-4"
+            "forms": ["crâne", "fémur", "côtes", "thorax", "abdomen", "bassin", "épaule", "colonne vertébrale"],
+            "text": "au niveau de la {Région} ",
+            "baseClassname": "col-span-4 col-start-9",
+            "contentClassname": "grid grid-cols-3 gap-2"
         },
         {
             "category": "Position",
             "type": "radio",
             "forms": ["droit", "gauche", "haut", "bas"],
-            "text": "{position} ",
-            "baseClassname": "col-span-3 row-span-2 col-start-10",
+            "text": "{position} \n",
+            "baseClassname": "col-span-6 row-start-2",
             "contentClassname": ""
         },
         {
-            "category": "Débouchant",
+            "category": "Soin",
             "type": "radio",
-            "forms": ["Non débouchant", "Débouchant"],
-            "text": ", {Débouchant} \\n",
-            "baseClassname": "col-span-4 row-start-3",
-            "contentClassname": ""
-        },
-        {
-            "category": "Nombre de balles",
-            "type": "number",
-            "text": "Retrait de {Nombre de balles} balles \\n",
-            "baseClassname": "col-span-4 col-start-5 row-start-3",
-            "contentClassname": ""
-        },
-        {
-            "category": "Nombre d'éclats",
-            "type": "number",
-            "text": "Retrait de {Nombre d'éclats} éclats \\n",
-            "baseClassname": "col-span-4 col-start-9 row-start-3",
+            "forms": ["attelle", "broches", "sutures", "drain"],
+            "text": "Mise en place de {soin} \n",
+            "baseClassname": "col-span-6 col-start-7 row-start-2",
             "contentClassname": ""
         }
     ],
-    "classname": "grid grid-cols-12 grid-rows-3 gap-3"
+    "classname": "grid grid-cols-12 grid-rows-2 gap-3"
 }

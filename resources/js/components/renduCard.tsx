@@ -64,7 +64,7 @@ export default function RenduCard({
                 value={data}
                 onChange={(event) => onChange?.(event.target.value)}
                 placeholder="Le texte genere apparait ici..."
-                rows={8}
+                rows={15}
                 className="mt-4 w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
             />
         </div>

@@ -176,7 +176,7 @@ export default function FormCard({
                                 }
                                 className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                             />
-                            <span className="text-slate-100">{option}</span>
+                            <span className="text-slate-100">{String(option).charAt(0).toUpperCase() + String(option).slice(1)}</span>
                         </label>
                     ))}
                 </div>
@@ -201,7 +201,7 @@ export default function FormCard({
                                 }
                                 className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                             />
-                            <span className="text-slate-100">{option}</span>
+                            <span className="text-slate-100">{String(option).charAt(0).toUpperCase() + String(option).slice(1)}</span>
                         </label>
                     ))}
                 </div>
