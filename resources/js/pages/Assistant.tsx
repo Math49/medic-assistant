@@ -102,7 +102,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                         <button
                             type="button"
                             onClick={() => window.location.reload()}
-                            className="inline-flex cursor-pointer items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 shadow shadow-slate-950/40 transition hover:bg-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
+                            className="inline-flex cursor-pointer items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 shadow shadow-slate-950/40 transition hover:bg-slate-950"
                         >
                             Reset
                         </button>
@@ -113,7 +113,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                             value={location}
                             onChange={(event) => setLocation(event.target.value)}
                             placeholder="Rue, avenue..."
-                            className="flex-1 min-w-[220px] rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/20 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
+                            className="flex-1 min-w-[220px] rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/20 placeholder:text-slate-500"
                         />
                     </div>
 
@@ -140,7 +140,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                                 onClick={() =>
                                     setIsSelectingInjury((previous) => !previous)
                                 }
-                                className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 shadow shadow-slate-950/30 transition hover:bg-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
+                                className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 shadow shadow-slate-950/30 transition hover:bg-slate-950"
                             >
                                 + Ajouter une blessure
                             </button>
@@ -157,7 +157,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                                         event.target.value = '';
                                         setIsSelectingInjury(false);
                                     }}
-                                    className="min-w-[240px] rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
+                                    className="min-w-[240px] rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/20"
                                 >
                                     <option value="" disabled>
                                         Choisir une blessure

@@ -209,7 +209,7 @@ export default function FormCard({
                     onChange={(event) =>
                         handleNumberChange(answerKey, event.target.value)
                     }
-                    className="w-full rounded-2xl border h-full border-slate-800 bg-slate-950 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/30 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-0"
+                    className="w-full rounded-2xl border h-full border-slate-800 bg-slate-950 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/30 placeholder:text-slate-500"
                     placeholder="Saisir une valeur"
                 />
             </div>
@@ -233,7 +233,7 @@ export default function FormCard({
                     <button
                         type="button"
                         onClick={onRemove}
-                        className="inline-flex items-center rounded-lg border border-red-500/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-red-300 transition hover:border-red-500 hover:text-red-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+                        className="inline-flex items-center rounded-lg border border-red-500/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-red-300 transition hover:border-red-500 hover:text-red-200"
                     >
                         Retirer
                     </button>
@@ -259,7 +259,7 @@ export default function FormCard({
                 }}
                 placeholder="Texte genere pour cette blessure"
                 rows={4}
-                className="mt-6 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-0"
+                className="mt-6 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
             />
         </div>
     );

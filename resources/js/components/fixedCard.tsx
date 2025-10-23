@@ -132,7 +132,7 @@ export default function FixedCard({
                         setHospitalText(event.target.value);
                     }}
                     placeholder="Texte genere pour la section hopital"
-                    className="mt-4 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-0"
+                    className="mt-4 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
                     rows={3}
                 />
             </section>
@@ -236,7 +236,7 @@ export default function FixedCard({
                         setSortieText(event.target.value);
                     }}
                     placeholder="Texte genere pour la section sortie"
-                    className="mt-4 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-0"
+                    className="mt-4 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
                     rows={4}
                 />
             </section>
