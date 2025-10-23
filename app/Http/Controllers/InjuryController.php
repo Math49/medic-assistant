@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Injury;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class InjuryController extends Controller
 {
@@ -13,7 +14,11 @@ class InjuryController extends Controller
      */
     public function index()
     {
-        //
+        $injuries = Injury::all();
+
+        return Inertia::render('Assistant', [
+            'injuries' => $injuries,
+        ]);
     }
 
     /**
