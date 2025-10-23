@@ -1,0 +1,53 @@
+{
+    "_id": { "$oid": "68fa0bbae58ddf5d8922a154" },
+    "title": "Blessure par balle",
+    "body": [
+        {
+            "category": "Lieu",
+            "type": "radio",
+            "forms": ["Bloc 1", "Bloc 2", "Bloc 3", "Bloc 4"],
+            "text": "Départ pour {lieu} \\n",
+            "baseClassname": "col-span-3 row-span-2",
+            "contentClassname": ""
+        },
+        {
+            "category": "Région",
+            "type": "radio",
+            "forms": ["Bras", "Avant-bras", "Main", "Jambe", "Cuisse", "Pied", "Abdomen", "Thorax", "Tête", "Dos", "Flanc"],
+            "text": "Blessure par balle au niveau de l'{Région} ",
+            "baseClassname": "col-span-3 row-span-2 col-start-3",
+            "contentClassname": "col-span-6 row-span-2 col-start-4"
+        },
+        {
+            "category": "Position",
+            "type": "radio",
+            "forms": ["droit", "gauche", "haut", "bas"],
+            "text": "{position} ",
+            "baseClassname": "col-span-3 row-span-2 col-start-10",
+            "contentClassname": ""
+        },
+        {
+            "category": "Débouchant",
+            "type": "radio",
+            "forms": ["Non débouchant", "Débouchant"],
+            "text": ", {Débouchant} \\n",
+            "baseClassname": "col-span-4 row-start-3",
+            "contentClassname": ""
+        },
+        {
+            "category": "Nombre de balles",
+            "type": "number",
+            "text": "Retrait de {Nombre de balles} balles \\n",
+            "baseClassname": "col-span-4 col-start-5 row-start-3",
+            "contentClassname": ""
+        },
+        {
+            "category": "Nombre d'éclats",
+            "type": "number",
+            "text": "Retrait de {Nombre d'éclats} éclats \\n",
+            "baseClassname": "col-span-4 col-start-9 row-start-3",
+            "contentClassname": ""
+        }
+    ],
+    "classname": "grid grid-cols-12 grid-rows-3 gap-3"
+}
