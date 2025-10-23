@@ -1,21 +1,101 @@
 import { Head } from '@inertiajs/react';
-import React, { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import DateCard from '@/components/dateCard';
 import FixedCard from '@/components/fixedCard';
+import FormCard from '@/components/formCard';
 import RenduCard from '@/components/renduCard';
 
-export default function Assistant({ injuries }: { injuries: any[] }) {
-    const [rendu, setRendu] = useState('');
-    const [location, setLocation] = useState('');
+type InjuryField = {
+    category: string;
+    type: 'radio' | 'checkbox' | 'number';
+    forms?: string[];
+    text: string;
+};
 
-    console.log(injuries);
+type Injury = {
+    id: string;
+    title: string;
+    body: InjuryField[];
+    classname?: string;
+};
+
+type InjuryFormState = {
+    key: string;
+    injury: Injury;
+    text: string;
+};
+
+const createFormKey = (injuryId: string) =>
+    `${injuryId}-${Date.now().toString(36)}-${Math.random()
+        .toString(36)
+        .slice(2, 8)}`;
+
+export default function Assistant({ injuries }: { injuries: Injury[] }) {
+    const [location, setLocation] = useState('');
+    const [hospitalText, setHospitalText] = useState('');
+    const [sortieText, setSortieText] = useState('');
+    const [injuryForms, setInjuryForms] = useState<InjuryFormState[]>([]);
+    const [isSelectingInjury, setIsSelectingInjury] = useState(false);
+    const [rendu, setRendu] = useState('');
+
+    useEffect(() => {
+        const sections = [
+            hospitalText,
+            ...injuryForms.map((form) => form.text).filter(Boolean),
+            sortieText,
+        ].filter(Boolean);
+
+        setRendu(sections.join('\n'));
+    }, [hospitalText, injuryForms, sortieText]);
+
+    const injuryOptions = useMemo(
+        () =>
+            injuries.map((injury) => ({
+                id: injury.id,
+                title: injury.title,
+                injury,
+            })),
+        [injuries],
+    );
+
+    const handleSelectInjury = (injuryId: string) => {
+        const target = injuryOptions.find((option) => option.id === injuryId);
+        if (!target) {
+            return;
+        }
+
+        setInjuryForms((previous) => [
+            ...previous,
+            {
+                key: createFormKey(target.id),
+                injury: target.injury,
+                text: '',
+            },
+        ]);
+    };
+
+    const handleInjuryChange = (key: string, value: string) => {
+        setInjuryForms((previous) =>
+            previous.map((form) =>
+                form.key === key ? { ...form, text: value } : form,
+            ),
+        );
+    };
+
+    const handleInjuryRemove = (key: string) => {
+        setInjuryForms((previous) => previous.filter((form) => form.key !== key));
+    };
 
     return (
         <>
             <Head title="Assistant">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
-                <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+                <link
+                    href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
+                    rel="stylesheet"
+                />
             </Head>
+
             <div className="flex min-h-screen items-center gap-5 bg-slate-900 p-5">
                 <div className="h-screen w-3/4 space-y-6 overflow-y-auto pr-2">
                     <div className="flex w-full flex-wrap items-center gap-4">
@@ -37,11 +117,65 @@ export default function Assistant({ injuries }: { injuries: any[] }) {
                         />
                     </div>
 
-                    <FixedCard onChange={setRendu} />
+                    <FixedCard
+                        onHospitalChange={setHospitalText}
+                        onSortieChange={setSortieText}
+                    />
+
+                    <div className="space-y-4">
+                        {injuryForms.map((form) => (
+                            <FormCard
+                                key={form.key}
+                                injury={form.injury}
+                                onChange={(value) =>
+                                    handleInjuryChange(form.key, value)
+                                }
+                                onRemove={() => handleInjuryRemove(form.key)}
+                            />
+                        ))}
+
+                        <div className="flex flex-wrap items-center gap-3">
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setIsSelectingInjury((previous) => !previous)
+                                }
+                                className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 shadow shadow-slate-950/30 transition hover:bg-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
+                            >
+                                + Ajouter une blessure
+                            </button>
+
+                            {isSelectingInjury && (
+                                <select
+                                    defaultValue=""
+                                    onChange={(event) => {
+                                        const value = event.target.value;
+                                        if (!value) {
+                                            return;
+                                        }
+                                        handleSelectInjury(value);
+                                        event.target.value = '';
+                                        setIsSelectingInjury(false);
+                                    }}
+                                    className="min-w-[240px] rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
+                                >
+                                    <option value="" disabled>
+                                        Choisir une blessure
+                                    </option>
+                                    {injuryOptions.map((option) => (
+                                        <option key={option.id} value={option.id}>
+                                            {option.title}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
+                        </div>
+                    </div>
                 </div>
+
                 <div className="h-screen w-1/4">
                     <DateCard />
-                    <RenduCard data={rendu} onChange={setRendu} />
+                    <RenduCard data={rendu} />
                 </div>
             </div>
         </>

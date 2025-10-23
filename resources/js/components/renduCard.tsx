@@ -1,21 +1,14 @@
-import { type ChangeEvent } from 'react';
 import { cn } from '@/lib/utils';
 
 type RenduCardProps = {
     data?: string;
-    onChange?: (value: string) => void;
     className?: string;
 };
 
 export default function RenduCard({
     data = '',
-    onChange,
     className,
 }: RenduCardProps) {
-    const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        onChange?.(event.target.value);
-    };
-
     return (
         <div
             className={cn(
@@ -28,8 +21,7 @@ export default function RenduCard({
             </h3>
             <textarea
                 value={data}
-                onChange={handleChange}
-                readOnly={!onChange}
+                readOnly
                 placeholder="Le texte genere apparait ici..."
                 rows={8}
                 className="mt-4 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-0"
