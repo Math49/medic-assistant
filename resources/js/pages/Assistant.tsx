@@ -45,7 +45,8 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
             sortieText,
         ].filter(Boolean);
 
-        setRendu(sections.join('\n'));
+        const combined = sections.join('\n');
+        setRendu((previous) => (previous === combined ? previous : combined));
     }, [hospitalText, injuryForms, sortieText]);
 
     const injuryOptions = useMemo(
@@ -96,13 +97,13 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                 />
             </Head>
 
-            <div className="flex min-h-screen items-center gap-5 bg-slate-900 p-5">
-                <div className="h-screen w-3/4 space-y-6 overflow-y-auto pr-2">
+            <div className="flex min-h-screen items-center gap-5 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6 text-slate-100">
+                <div className="h-screen w-3/4 space-y-6 overflow-y-auto pr-3">
                     <div className="flex w-full flex-wrap items-center gap-4">
                         <button
                             type="button"
                             onClick={() => window.location.reload()}
-                            className="inline-flex cursor-pointer items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 shadow shadow-slate-950/40 transition hover:bg-slate-950"
+                            className="inline-flex cursor-pointer items-center rounded-xl border border-slate-800/80 bg-slate-950/60 px-4 py-2 text-sm font-semibold text-slate-200 shadow shadow-slate-950/40 transition hover:bg-slate-950"
                         >
                             Reset
                         </button>
@@ -113,7 +114,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                             value={location}
                             onChange={(event) => setLocation(event.target.value)}
                             placeholder="Rue, avenue..."
-                            className="flex-1 min-w-[220px] rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/20 placeholder:text-slate-500"
+                            className="flex-1 min-w-[220px] rounded-xl border border-slate-800/80 bg-slate-950/40 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/40 placeholder:text-slate-500"
                         />
                     </div>
 
@@ -140,7 +141,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                                 onClick={() =>
                                     setIsSelectingInjury((previous) => !previous)
                                 }
-                                className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 shadow shadow-slate-950/30 transition hover:bg-slate-950"
+                                className="inline-flex items-center rounded-xl border border-slate-800/80 bg-slate-950/60 px-4 py-2 text-sm font-semibold text-slate-200 shadow shadow-slate-950/30 transition hover:bg-slate-950"
                             >
                                 + Ajouter une blessure
                             </button>
@@ -157,7 +158,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                                         event.target.value = '';
                                         setIsSelectingInjury(false);
                                     }}
-                                    className="min-w-[240px] rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/20"
+                                    className="min-w-[240px] rounded-xl border border-slate-800/80 bg-slate-950/60 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/30"
                                 >
                                     <option value="" disabled>
                                         Choisir une blessure
@@ -173,9 +174,9 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                     </div>
                 </div>
 
-                <div className="h-screen w-1/4">
+                <div className="h-screen w-1/4 space-y-6 overflow-y-auto pl-1">
                     <DateCard />
-                    <RenduCard data={rendu} />
+                    <RenduCard data={rendu} onChange={setRendu} />
                 </div>
             </div>
         </>

@@ -40,7 +40,7 @@ export default function DateCard({ className }: { className?: string }) {
     return (
         <div
             className={cn(
-                'w-full rounded-3xl border border-slate-800 bg-slate-900 p-6 text-slate-100 shadow-xl shadow-slate-950/20',
+                'w-full rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-100 shadow-[0_25px_55px_-30px_rgba(15,23,42,0.9)] backdrop-blur',
                 className,
             )}
         >
@@ -54,12 +54,12 @@ export default function DateCard({ className }: { className?: string }) {
                 {TIME_LABELS.map((label, index) => (
                     <div
                         key={label}
-                        className="flex overflow-hidden rounded-2xl border border-slate-800 bg-slate-800/70 shadow shadow-slate-950/30"
+                        className="flex overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-900/60 shadow shadow-slate-950/40"
                     >
                         <button
                             type="button"
                             onClick={() => handleFillNow(index)}
-                            className="flex-1 cursor-pointer px-4 py-3 text-left text-sm font-medium text-slate-100 transition hover:bg-slate-800 sm:text-base"
+                            className="flex-1 cursor-pointer px-4 py-3 text-left text-sm font-semibold text-slate-100 transition hover:bg-slate-900 sm:text-base"
                         >
                             {label}
                         </button>
@@ -70,7 +70,7 @@ export default function DateCard({ className }: { className?: string }) {
                             onChange={(event) =>
                                 handleChange(index, event.target.value)
                             }
-                            className="w-28 shrink-0 border-0 bg-slate-950 px-4 py-3 text-right text-sm font-semibold tracking-wider text-slate-100 outline-none placeholder:text-slate-500 sm:w-32 sm:text-base"
+                            className="w-28 shrink-0 border-0 bg-slate-950/70 px-4 py-3 text-right text-sm font-semibold tracking-wider text-slate-100 placeholder:text-slate-500 sm:w-32 sm:text-base"
                         />
                     </div>
                 ))}

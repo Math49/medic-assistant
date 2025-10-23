@@ -6,6 +6,7 @@ type InjuryField = {
     type: 'radio' | 'checkbox' | 'number';
     forms?: string[];
     text: string;
+    className?: string;
     classname?: string;
 };
 
@@ -13,12 +14,13 @@ type Injury = {
     id: string;
     title: string;
     body: InjuryField[];
+    className?: string;
     classname?: string;
 };
 
 type FormCardProps = {
     injury: Injury;
-    classname?: string;
+    className?: string;
     onChange?: (value: string) => void;
     onRemove?: () => void;
 };
@@ -72,7 +74,7 @@ const computeSegment = (
         segment = segment.split(placeholder).join(value);
     }
 
-    return segment;
+    return segment.replace(/\\n/g, '\n');
 };
 
 const computeInjuryText = (injury: Injury, answers: AnswerMap) =>
@@ -83,7 +85,7 @@ const computeInjuryText = (injury: Injury, answers: AnswerMap) =>
 
 export default function FormCard({
     injury,
-    classname,
+    className,
     onChange,
     onRemove,
 }: FormCardProps) {
@@ -149,14 +151,15 @@ export default function FormCard({
     const renderField = (field: InjuryField) => {
         const answerKey = normalizeToken(field.category);
         const answer = answers[answerKey];
+        const fieldClass = field.className ?? field.classname ?? '';
 
         if (field.type === 'radio') {
             return (
-                <div className={`space-y-2 ${field.classname}`}>
+                <div className={cn('space-y-2', fieldClass)}>
                     {field.forms?.map((option) => (
                         <label
                             key={option}
-                            className="flex items-center gap-3 h-full rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-3 text-sm shadow shadow-slate-950/30 transition hover:bg-slate-800"
+                            className="flex h-full items-center gap-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 px-4 py-3 text-sm shadow shadow-slate-950/40 transition hover:bg-slate-900"
                         >
                             <input
                                 type="radio"
@@ -166,7 +169,7 @@ export default function FormCard({
                                 onChange={(event) =>
                                     updateAnswer(answerKey, event.target.value)
                                 }
-                                className="h-4 w-4 border-slate-600 bg-slate-900 text-blue-500 focus:ring-blue-500"
+                                className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                             />
                             <span className="text-slate-100">{option}</span>
                         </label>
@@ -178,11 +181,11 @@ export default function FormCard({
         if (field.type === 'checkbox') {
             const selected = Array.isArray(answer) ? answer : [];
             return (
-                <div className={`space-y-2 ${field.classname}`}>
+                <div className={cn('space-y-2', fieldClass)}>
                     {field.forms?.map((option) => (
                         <label
                             key={option}
-                            className="flex items-center h-full gap-3 rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-3 text-sm shadow shadow-slate-950/30 transition hover:bg-slate-800"
+                            className="flex h-full items-center gap-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 px-4 py-3 text-sm shadow shadow-slate-950/40 transition hover:bg-slate-900"
                         >
                             <input
                                 type="checkbox"
@@ -191,7 +194,7 @@ export default function FormCard({
                                 onChange={() =>
                                     handleCheckboxToggle(answerKey, option)
                                 }
-                                className="h-4 w-4 border-slate-600 bg-slate-900 text-blue-500 focus:ring-blue-500"
+                                className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                             />
                             <span className="text-slate-100">{option}</span>
                         </label>
@@ -201,7 +204,7 @@ export default function FormCard({
         }
 
         return (
-            <div className={`space-y-2 ${field.classname}`}>
+            <div className={cn('space-y-2', fieldClass)}>
                 <input
                     type="number"
                     inputMode="numeric"
@@ -209,7 +212,7 @@ export default function FormCard({
                     onChange={(event) =>
                         handleNumberChange(answerKey, event.target.value)
                     }
-                    className="w-full rounded-2xl border h-full border-slate-800 bg-slate-950 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/30 placeholder:text-slate-500"
+                    className="h-full w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/40 placeholder:text-slate-500"
                     placeholder="Saisir une valeur"
                 />
             </div>
@@ -219,8 +222,7 @@ export default function FormCard({
     return (
         <div
             className={cn(
-                'w-full rounded-3xl border border-slate-800 bg-slate-900 p-6 text-slate-100 shadow-xl shadow-slate-950/20',
-                classname,
+                'w-full rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-100 shadow-[0_25px_55px_-30px_rgba(15,23,42,0.9)] backdrop-blur',
             )}
         >
             <header className="mb-6 flex items-center justify-between gap-4">
@@ -240,7 +242,7 @@ export default function FormCard({
                 )}
             </header>
 
-            <div className={`space-y-6 ${injury.classname}`}>
+            <div className={cn('space-y-6', injury.classname)}>
                 {injury.body.map((field) => (
                     <div key={field.category} className="space-y-3">
                         <h4 className="text-sm font-semibold text-slate-200">
@@ -259,7 +261,7 @@ export default function FormCard({
                 }}
                 placeholder="Texte genere pour cette blessure"
                 rows={4}
-                className="mt-6 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
+                className="mt-6 w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
             />
         </div>
     );

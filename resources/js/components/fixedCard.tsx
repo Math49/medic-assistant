@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const HOSPITAL_OPTIONS = ['hôpital sud', 'paleto'];
-const CHAMBRE_OPTIONS = ['salle de réveil WARD', "chambre d'hospitalisation"];
-const PAPIER_OPTIONS = ["l'ordonnance", "l'arrêt de travail"];
-const DEPART_OPTIONS = ['Départ du Centre Hospitalier', 'Hospitalisation'];
+const HOSPITAL_OPTIONS = ['hopital sud', 'paleto'];
+const CHAMBRE_OPTIONS = ['salle de reveil WARD', "chambre d'hospitalisation"];
+const PAPIER_OPTIONS = ["l'ordonnance", "l'arret de travail"];
+const DEPART_OPTIONS = ['Depart du Centre Hospitalier', 'Hospitalisation'];
 
 type FixedCardProps = {
     className?: string;
@@ -53,25 +53,25 @@ export default function FixedCard({
             setHospitalText('');
             return;
         }
-        setHospitalText(`Emmené à ${hospitalChoice}`);
+        setHospitalText(`Emmene au ${hospitalChoice}`);
     }, [hospitalChoice, hospitalDirty]);
 
     const generatedSortieText = useMemo(() => {
         const parts: string[] = [];
 
         if (chambreSelections.length > 0) {
-            parts.push(`Déplacement du patient dans ${formatList(chambreSelections)} \n`);
+            parts.push(`Deplacement du patient dans ${formatList(chambreSelections)}`);
         }
 
         if (papierSelections.length > 0) {
-            parts.push(`Transmission de ${formatList(papierSelections)} \n`);
+            parts.push(`Transmission de ${formatList(papierSelections)}`);
         }
 
         if (departChoice) {
             parts.push(`${departChoice} du patient`);
         }
 
-        return parts.join('');
+        return parts.join('\n');
     }, [chambreSelections, papierSelections, departChoice]);
 
     useEffect(() => {
@@ -92,14 +92,14 @@ export default function FixedCard({
     return (
         <div
             className={cn(
-                'w-full rounded-3xl flex border border-slate-800 bg-slate-900 p-6 text-slate-100 shadow-xl shadow-slate-950/20',
+                'w-full rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-100 shadow-[0_25px_55px_-30px_rgba(15,23,42,0.9)] backdrop-blur md:flex md:gap-8',
                 className,
             )}
         >
-            <section className="w-1/3 pr-4">
+            <section className="md:w-1/3 md:border-r md:border-slate-800/60 md:pr-6">
                 <header className="mb-4">
                     <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">
-                        Hôpital
+                        Hopital
                     </h3>
                 </header>
 
@@ -107,7 +107,7 @@ export default function FixedCard({
                     {HOSPITAL_OPTIONS.map((option) => (
                         <label
                             key={option}
-                            className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-3 text-sm shadow shadow-slate-950/30 transition hover:bg-slate-800"
+                            className="flex items-center gap-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 px-4 py-3 text-sm shadow shadow-slate-950/40 transition hover:bg-slate-900"
                         >
                             <input
                                 type="radio"
@@ -118,7 +118,7 @@ export default function FixedCard({
                                     setHospitalDirty(false);
                                     setHospitalChoice(event.target.value);
                                 }}
-                                className="h-4 w-4 border-slate-600 bg-slate-900 text-blue-500 focus:ring-blue-500"
+                                className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                             />
                             <span className="text-slate-100">{option}</span>
                         </label>
@@ -132,19 +132,19 @@ export default function FixedCard({
                         setHospitalText(event.target.value);
                     }}
                     placeholder="Texte genere pour la section hopital"
-                    className="mt-4 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
-                    rows={3}
+                    className="mt-4 w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
+                    rows={4}
                 />
             </section>
 
-            <section className="w-2/3 pl-4 border-l border-slate-800">
+            <section className="mt-8 flex-1 md:mt-0 md:pl-6">
                 <header className="mb-4">
                     <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">
                         Sortie
                     </h3>
                 </header>
 
-                <div className="space-y-6 flex justify-between">
+                <div className="grid gap-6 md:grid-cols-3">
                     <div>
                         <h4 className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                             Chambre
@@ -153,7 +153,7 @@ export default function FixedCard({
                             {CHAMBRE_OPTIONS.map((option) => (
                                 <label
                                     key={option}
-                                    className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-3 text-sm shadow shadow-slate-950/30 transition hover:bg-slate-800"
+                                    className="flex items-center gap-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 px-4 py-3 text-sm shadow shadow-slate-950/40 transition hover:bg-slate-900"
                                 >
                                     <input
                                         type="checkbox"
@@ -165,7 +165,7 @@ export default function FixedCard({
                                                 toggleSelection(option, current),
                                             );
                                         }}
-                                        className="h-4 w-4 border-slate-600 bg-slate-900 text-blue-500 focus:ring-blue-500"
+                                        className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                                     />
                                     <span className="text-slate-100">{option}</span>
                                 </label>
@@ -181,7 +181,7 @@ export default function FixedCard({
                             {PAPIER_OPTIONS.map((option) => (
                                 <label
                                     key={option}
-                                    className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-3 text-sm shadow shadow-slate-950/30 transition hover:bg-slate-800"
+                                    className="flex items-center gap-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 px-4 py-3 text-sm shadow shadow-slate-950/40 transition hover:bg-slate-900"
                                 >
                                     <input
                                         type="checkbox"
@@ -193,7 +193,7 @@ export default function FixedCard({
                                                 toggleSelection(option, current),
                                             );
                                         }}
-                                        className="h-4 w-4 border-slate-600 bg-slate-900 text-blue-500 focus:ring-blue-500"
+                                        className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                                     />
                                     <span className="text-slate-100">{option}</span>
                                 </label>
@@ -209,7 +209,7 @@ export default function FixedCard({
                             {DEPART_OPTIONS.map((option) => (
                                 <label
                                     key={option}
-                                    className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-3 text-sm shadow shadow-slate-950/30 transition hover:bg-slate-800"
+                                    className="flex items-center gap-3 rounded-2xl border border-slate-800/70 bg-slate-900/60 px-4 py-3 text-sm shadow shadow-slate-950/40 transition hover:bg-slate-900"
                                 >
                                     <input
                                         type="radio"
@@ -220,7 +220,7 @@ export default function FixedCard({
                                             setSortieDirty(false);
                                             setDepartChoice(event.target.value);
                                         }}
-                                        className="h-4 w-4 border-slate-600 bg-slate-900 text-blue-500 focus:ring-blue-500"
+                                        className="h-4 w-4 border-slate-600 bg-slate-950 text-blue-500 focus:ring-blue-500"
                                     />
                                     <span className="text-slate-100">{option}</span>
                                 </label>
@@ -236,8 +236,8 @@ export default function FixedCard({
                         setSortieText(event.target.value);
                     }}
                     placeholder="Texte genere pour la section sortie"
-                    className="mt-4 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
-                    rows={4}
+                    className="mt-6 w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
+                    rows={5}
                 />
             </section>
         </div>
