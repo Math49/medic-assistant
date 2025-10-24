@@ -9,7 +9,7 @@ RUN apt-get update \
     supervisor
 
 RUN install-php-extensions \
-	mongodb
+    mongodb
 
 COPY . /app
 
@@ -38,3 +38,7 @@ RUN php artisan config:cache
 RUN php artisan route:cache
 
 RUN php artisan view:cache
+
+# Commande pour démarrer FrankenPHP
+CMD ["frankenphp", "serve", "--port=8080", "--host=0.0.0.0"]
+
