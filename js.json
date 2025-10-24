@@ -1,44 +1,36 @@
 {
     "_id": { "$oid": "68fa0bbae58ddf5d8922a154" },
-    "title": "Imagerie",
+    "title": "Traitement simple",
     "body": [
         {
             "category": "Lieu",
             "type": "radio",
-            "forms": ["radiologie", "scanner", "IRM"],
+            "forms" :["bloc 1", "bloc 2", "bloc 3", "bloc 4", "chambre"],
             "text": "Départ pour {lieu} \n",
-            "baseClassname": "col-span-3",
+            "baseClassname": "col-span-6",
             "contentClassname": ""
         },
         {
-            "category": "Blessure",
+            "category": "Qualité",
             "type": "radio",
-            "forms": ["Fracture", "Fissures", "Hémoragie", "bas"],
-            "text": "{blessure} ",
-            "baseClassname": "col-span-5 col-start-4",
-            "contentClassname": "grid grid-cols-3 gap-2"
+            "forms" :["Brûlure du 1er degré", "Brûlure du 2ème degré superficiel", "Plaie", "Fracture non déplacée"],
+            "text": "{Qualité} ",
+            "baseClassname": "col-span-6 col-start-7",
+            "contentClassname": "grid grid-cols-2 gap-3"
         },
         {
             "category": "Région",
             "type": "radio",
-            "forms": ["crâne", "fémur", "côtes", "thorax", "abdomen", "bassin", "épaule", "colonne vertébrale"],
-            "text": "au niveau de la {Région} ",
-            "baseClassname": "col-span-4 col-start-9",
-            "contentClassname": "grid grid-cols-3 gap-2"
+            "forms" :["bras","avant-bras","main","jambe","cuisse","pied","abdomen","thorax","crâne","dos","flanc"],
+            "text": " au niveau de l'{Région} ",
+            "baseClassname": "col-span-6 row-start-2",
+            "contentClassname": "grid grid-cols-3 gap-3"
         },
         {
             "category": "Position",
             "type": "radio",
-            "forms": ["droit", "gauche", "haut", "bas"],
-            "text": "{position} \n",
-            "baseClassname": "col-span-6 row-start-2",
-            "contentClassname": ""
-        },
-        {
-            "category": "Soin",
-            "type": "radio",
-            "forms": ["attelle", "broches", "sutures", "drain"],
-            "text": "Mise en place de {soin} \n",
+            "forms" :["droit", "gauche", "supérieur", "inférieur"],
+            "text": "  {Position} \n",
             "baseClassname": "col-span-6 col-start-7 row-start-2",
             "contentClassname": ""
         }

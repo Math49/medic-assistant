@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const HOSPITAL_OPTIONS = ['hôpital sud', 'paleto'];
+const HOSPITAL_OPTIONS = ['Ocean Medical Center', 'Paleto Medical Center'];
 const CHAMBRE_OPTIONS = ['salle de réveil WARD', "chambre d'hospitalisation"];
 const PAPIER_OPTIONS = ["l'ordonnance", "l'arrêt de travail"];
-const DEPART_OPTIONS = ['départ du Centre Hospitalier', 'Hospitalisation'];
+const DEPART_OPTIONS = ['Départ du Centre Hospitalier', 'Hospitalisation'];
 
 type FixedCardProps = {
     className?: string;
@@ -53,7 +53,7 @@ export default function FixedCard({
             setHospitalText('');
             return;
         }
-        setHospitalText(`Emmené à ${hospitalChoice}`);
+        setHospitalText(`Arrivé sur les lieux (appel dispatch) \nRéanimation sur les lieux \nPremier diagnostic de la douleur et de l’état du patient\nStabilisation de la victime puis évacuation vers ${hospitalChoice}`);
     }, [hospitalChoice, hospitalDirty]);
 
     const generatedSortieText = useMemo(() => {
@@ -64,6 +64,7 @@ export default function FixedCard({
         }
 
         if (papierSelections.length > 0) {
+            parts.push('Vérifications des constantes du patient');
             parts.push(`Transmission de ${formatList(papierSelections)}`);
         }
 
@@ -133,7 +134,7 @@ export default function FixedCard({
                     }}
                     placeholder="Texte genere pour la section hopital"
                     className="mt-4 w-full rounded-2xl border border-slate-800/70 bg-slate-950/70 p-4 text-sm text-slate-100 shadow-inner shadow-slate-950/40 placeholder:text-slate-500"
-                    rows={1}
+                    rows={5}
                 />
             </section>
 
