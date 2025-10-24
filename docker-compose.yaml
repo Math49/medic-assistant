@@ -1,8 +1,8 @@
 services:
   php:
     build:
-      context: ./docker/php
-      dockerfile: Dockerfile
+      dockerfile: ./docker/php/Dockerfile
+      context: .
     ports:
       - "8000"
     env_file:
