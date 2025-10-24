@@ -1,7 +1,7 @@
 services:
   php:
     build:
-      context: ./docker/PHP
+      context: ./docker/php
       dockerfile: Dockerfile
     ports:
       - "8000"
