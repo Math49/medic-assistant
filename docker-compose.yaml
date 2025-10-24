@@ -1,12 +1,14 @@
 services:
   php:
-    build:
-      dockerfile: ./docker/php/Dockerfile
-      context: .
+    image: dunglas/frankenphp
+    restart: always
     ports:
-      - "8000:8000"
-    env_file:
-      - .env
+      - "80" # HTTP
+      - "443" # HTTPS
+      - "443/udp" # HTTP/3
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
     labels:
       - traefik.enable=true
       - traefik.http.routers.medic-assistant.rule=Host(`${DOMAIN_NAME}`)
@@ -22,10 +24,14 @@ services:
       - traefik.http.middlewares.medic-assistant.headers.STSIncludeSubdomains=true
       - traefik.http.middlewares.medic-assistant.headers.STSPreload=true
       - traefik.http.routers.medic-assistant.middlewares=medic-assistant@docker
-      #- traefik.http.services.medic-assistant.loadbalancer.server.port=8000
+      - traefik.http.services.medic-assistant.loadbalancer.server.port=8000
     networks:
       - traefik_public
 
 networks:
   traefik_public:
     external: true
+
+volumes:
+  caddy_data:
+  caddy_config:
