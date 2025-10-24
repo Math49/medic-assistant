@@ -1,0 +1,34 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BLKA-9k1.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/app.tsx": {
+    "file": "assets/app-yR7FVso7.js",
+    "name": "app",
+    "src": "resources/js/app.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/pages/Assistant.tsx"
+    ],
+    "css": [
+      "assets/app-BLKA-9k1.css"
+    ]
+  },
+  "resources/js/pages/Assistant.tsx": {
+    "file": "assets/Assistant-DmZrpwFd.js",
+    "name": "Assistant",
+    "src": "resources/js/pages/Assistant.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ],
+    "css": [
+      "assets/app-BLKA-9k1.css"
+    ]
+  }
+}
