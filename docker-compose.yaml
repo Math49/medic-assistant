@@ -9,7 +9,7 @@ services:
       - .env
     labels:
       - traefik.enable=true
-      - traefik.http.routers.medic-assistant.rule=Host(`medic-assistant.${DOMAIN_NAME}`)
+      - traefik.http.routers.medic-assistant.rule=Host(`${DOMAIN_NAME}`)
       - traefik.http.routers.medic-assistant.tls=true
       - traefik.http.routers.medic-assistant.entrypoints=web,websecure
       - traefik.http.routers.medic-assistant.tls.certresolver=http_resolver
