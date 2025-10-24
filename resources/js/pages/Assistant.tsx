@@ -154,7 +154,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                                 }
                                 className="inline-flex items-center rounded-xl border border-slate-800/80 bg-slate-950/60 px-4 py-2 text-sm font-semibold text-slate-200 shadow shadow-slate-950/30 transition hover:bg-slate-950"
                             >
-                                + Ajouter une blessure
+                                + Ajouter un traitement
                             </button>
 
                             {isSelectingInjury && (
@@ -172,7 +172,7 @@ export default function Assistant({ injuries }: { injuries: Injury[] }) {
                                     className="min-w-[240px] rounded-xl border border-slate-800/80 bg-slate-950/60 px-4 py-2 text-sm text-slate-100 shadow shadow-slate-950/30"
                                 >
                                     <option value="" disabled>
-                                        Choisir une blessure
+                                        Choisir un traitement
                                     </option>
                                     {injuryOptions.map((option) => (
                                         <option key={option.id} value={option.id}>
