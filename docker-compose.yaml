@@ -23,3 +23,9 @@ services:
       - traefik.http.middlewares.medic-assistant.headers.STSPreload=true
       - traefik.http.routers.medic-assistant.middlewares=medic-assistant@docker
       - traefik.http.services.medic-assistant.loadbalancer.server.port=8000
+    networks:
+      - traefik_public
+
+networks:
+  traefik_public:
+    external: true
